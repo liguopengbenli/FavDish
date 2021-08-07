@@ -1,4 +1,4 @@
-package com.lig.favdish.ui.dashboard
+package com.lig.favdish.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.lig.favdish.R
 import com.lig.favdish.databinding.FragmentDashboardBinding
+import com.lig.favdish.viewmodel.DashboardViewModel
 
 class DashboardFragment : Fragment() {
 
