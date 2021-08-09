@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -39,6 +40,9 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.lig.favdish.R
 import com.lig.favdish.databinding.ActivityAddUpdateDishBinding
 import com.lig.favdish.databinding.DialogCustomImageSelectionBinding
+import com.lig.favdish.databinding.DialogCustomListBinding
+import com.lig.favdish.util.Constants
+import com.lig.favdish.view.adapters.CustomListItemAdapter
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -56,6 +60,9 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(mBinding.root)
         setActionBar()
         mBinding.ivAddDishImage.setOnClickListener(this)
+        mBinding.etType.setOnClickListener(this)
+        mBinding.etCategory.setOnClickListener(this)
+        mBinding.etCookingTime.setOnClickListener(this)
 
     }
 
@@ -76,6 +83,29 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                     customImageSelectionDialog()
                     return
                 }
+                R.id.et_type -> {
+                    customItemsListDialog(
+                        resources.getString(R.string.title_select_dish_type),
+                        Constants.dishTypes(),
+                        Constants.DISH_TYPE
+                    )
+                }
+                R.id.et_category -> {
+                    customItemsListDialog(
+                        resources.getString(R.string.title_select_dish_category),
+                        Constants.dishCategories(),
+                        Constants.DISH_CATEGORY
+                    )
+                }
+                R.id.et_cooking_time -> {
+                    customItemsListDialog(
+                        resources.getString(R.string.title_select_dish_cooking_time),
+                        Constants.dishCookTime(),
+                        Constants.DISH_COOKING_TIME
+                    )
+                }
+
+
             }
         }
     }
@@ -116,7 +146,7 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                         .load(selectedPhototUri)
                         .centerCrop()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .listener(object : RequestListener<Drawable>{
+                        .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
                                 e: GlideException?,
                                 model: Any?,
@@ -263,6 +293,18 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         return file.absolutePath
+
+    }
+
+    private fun customItemsListDialog(titie: String, itemList: List<String>, selection: String) {
+        val customListDialog = Dialog(this)
+        val binding: DialogCustomListBinding = DialogCustomListBinding.inflate(layoutInflater)
+        customListDialog.setContentView(binding.root)
+        binding.tvTitle.text = titie
+        binding.rvList.layoutManager = LinearLayoutManager(this)
+        val adapter = CustomListItemAdapter(this, itemList, selection)
+        binding.rvList.adapter = adapter
+        customListDialog.show()
 
     }
 
