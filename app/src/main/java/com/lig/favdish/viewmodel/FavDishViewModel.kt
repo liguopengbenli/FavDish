@@ -16,8 +16,6 @@ class FavDishViewModel(
         repository.insertFavDishData(dish)
     }
 
-
-
 }
 
 

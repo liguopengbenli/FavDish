@@ -29,4 +29,5 @@
     <string name="err_msg_select_dish_cooking_time">Select dish cooking time.</string>
     <string name="err_msg_enter_dish_cooking_instructions">Enter dish cooking instructions.</string>
     <string name="err_msg_enter_dish_invalid">All entries invalid</string>
+    <string name="title_msg_enter_dish_valid">You successfully added your favorite dish details</string>
 </resources>

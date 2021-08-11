@@ -19,6 +19,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -39,11 +40,15 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.lig.favdish.R
+import com.lig.favdish.application.FavDishApplication
 import com.lig.favdish.databinding.ActivityAddUpdateDishBinding
 import com.lig.favdish.databinding.DialogCustomImageSelectionBinding
 import com.lig.favdish.databinding.DialogCustomListBinding
+import com.lig.favdish.model.entities.FavDish
 import com.lig.favdish.util.Constants
 import com.lig.favdish.view.adapters.CustomListItemAdapter
+import com.lig.favdish.viewmodel.FavDishViewModel
+import com.lig.favdish.viewmodel.FavDishViewModelFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -56,6 +61,10 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
     private var mImagePath: String = ""
 
     private lateinit var mCustomListDialog: Dialog
+
+    private val mFavDishViewModel: FavDishViewModel by viewModels {
+        FavDishViewModelFactory((application as FavDishApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -173,11 +182,25 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                             ).show()
                         }
                         else -> {
+                            val favDishDetails: FavDish = FavDish(
+                                mImagePath,
+                                Constants.DISH_IMAGE_SOURCE_LOCAL,
+                                title,
+                                type,
+                                category,
+                                ingredients,
+                                cookingTimeInMinutes,
+                                cookingDirection,
+                                false
+                            )
+
+                            mFavDishViewModel.insert(favDishDetails)
                             Toast.makeText(
                                 this@AddUpdateDishActivity,
-                                "All valid",
+                                resources.getString(R.string.title_msg_enter_dish_valid),
                                 Toast.LENGTH_SHORT
                             ).show()
+                            finish()
                         }
                     }
 
