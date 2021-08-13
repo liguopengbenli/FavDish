@@ -11,7 +11,7 @@
     <string name="lbl_type">Type</string>
     <string name="lbl_category">Category</string>
     <string name="lbl_ingredients">Ingredients</string>
-    <string name="lbl_cooking_time_in_minutes">Cooking Time In Minutes</string>
+    <string name="lbl_cooking_time_in_minutes">Cooking Time In Minutes %s</string>
     <string name="lbl_direction_to_cook">Direction To Cook</string>
     <string name="lbl_add_dish">ADD DISH</string>
     <string name="title_select_image">SELECT IMAGE</string>

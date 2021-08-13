@@ -35,7 +35,7 @@ class FavDishAdapter(private val fragment: Fragment) :
 
         holder.itemView.setOnClickListener {
             if (fragment is AllDishesFragment) {
-                fragment.dishDetails()
+                fragment.dishDetails(dish)
             }
         }
     }

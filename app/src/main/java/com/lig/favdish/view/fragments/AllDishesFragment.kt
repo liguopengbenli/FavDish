@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.lig.favdish.R
 import com.lig.favdish.application.FavDishApplication
 import com.lig.favdish.databinding.FragmentAlldishesBinding
+import com.lig.favdish.model.entities.FavDish
 import com.lig.favdish.view.activities.AddUpdateDishActivity
 import com.lig.favdish.view.activities.MainActivity
 import com.lig.favdish.view.adapters.FavDishAdapter
@@ -82,8 +83,10 @@ class AllDishesFragment : Fragment() {
         }
     }
 
-    fun dishDetails() {
-        findNavController().navigate(AllDishesFragmentDirections.actionNavigationAllDishesToDishDetailFragment())
+    fun dishDetails(favDish: FavDish) {
+        findNavController().navigate(AllDishesFragmentDirections.actionNavigationAllDishesToDishDetailFragment(
+            favDish
+        ))
 
         if (requireActivity() is MainActivity) {
             (activity as MainActivity).hideBottomNavigationView()
