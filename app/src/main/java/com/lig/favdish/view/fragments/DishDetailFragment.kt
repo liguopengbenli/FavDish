@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
@@ -16,13 +17,20 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.lig.favdish.R
+import com.lig.favdish.application.FavDishApplication
 import com.lig.favdish.databinding.FragmentDishDetailBinding
+import com.lig.favdish.viewmodel.FavDishViewModel
+import com.lig.favdish.viewmodel.FavDishViewModelFactory
 import java.io.IOException
 
 
 class DishDetailFragment : Fragment() {
 
     private var mBinding: FragmentDishDetailBinding? = null
+    private val mFavDishViewModel: FavDishViewModel by viewModels {
+        FavDishViewModelFactory((requireActivity().application as FavDishApplication).repository)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,8 +96,29 @@ class DishDetailFragment : Fragment() {
                     R.string.lbl_cooking_time_in_minutes,
                     detail.dishDetails.cookingTime
                 )
+
+                ivFavoriteDish.setImageResource(
+                    when (args.dishDetails.favoriteDish) {
+                        true -> R.drawable.ic_favorite_selected
+                        false -> R.drawable.ic_favorite_unselected
+                    }
+                )
+
+                ivFavoriteDish.setOnClickListener {
+                    args.dishDetails.favoriteDish = !args.dishDetails.favoriteDish
+                    mFavDishViewModel.update(args.dishDetails)
+
+                    ivFavoriteDish.setImageResource(
+                        when (args.dishDetails.favoriteDish) {
+                            true -> R.drawable.ic_favorite_selected
+                            false -> R.drawable.ic_favorite_unselected
+                        }
+                    )
+                }
             }
         }
+
+
     }
 
 
