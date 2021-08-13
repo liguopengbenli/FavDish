@@ -1,5 +1,6 @@
 package com.lig.favdish.view.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import com.bumptech.glide.Glide
 import com.lig.favdish.R
 import com.lig.favdish.databinding.ItemDishBinding
 import com.lig.favdish.model.entities.FavDish
+import com.lig.favdish.util.Constants
+import com.lig.favdish.view.activities.AddUpdateDishActivity
 import com.lig.favdish.view.fragments.AllDishesFragment
 import com.lig.favdish.view.fragments.FavoriteDishesFragment
 
@@ -56,6 +59,10 @@ class FavDishAdapter(private val fragment: Fragment) :
             popup.setOnMenuItemClickListener {
                 if (it.itemId == R.id.action_edit_dish) {
                     Toast.makeText(fragment.context, "edit dish", Toast.LENGTH_SHORT).show()
+                    val intent =
+                        Intent(fragment.requireActivity(), AddUpdateDishActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_DISH_DETAILS, dish)
+                    fragment.requireActivity().startActivity(intent)
                 } else if (it.itemId == R.id.action_delete_dish) {
                     Toast.makeText(fragment.context, "delete dish", Toast.LENGTH_SHORT).show()
 
@@ -68,7 +75,7 @@ class FavDishAdapter(private val fragment: Fragment) :
 
         if (fragment is AllDishesFragment) {
             holder.ibMore.visibility = View.VISIBLE
-        }else if (fragment is FavoriteDishesFragment) {
+        } else if (fragment is FavoriteDishesFragment) {
             holder.ibMore.visibility = View.GONE
         }
 
