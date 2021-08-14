@@ -4,13 +4,12 @@ import androidx.lifecycle.*
 import com.lig.favdish.model.database.FavDishRepository
 import com.lig.favdish.model.entities.FavDish
 import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
 
 class FavDishViewModel(
     private val repository: FavDishRepository
-): ViewModel() {
+) : ViewModel() {
 
-    fun insert(dish: FavDish)  = viewModelScope.launch {
+    fun insert(dish: FavDish) = viewModelScope.launch {
         repository.insertFavDishData(dish)
     }
 
@@ -24,6 +23,10 @@ class FavDishViewModel(
     fun delete(favDish: FavDish) = viewModelScope.launch {
         repository.deleteFavDishData(favDish)
     }
+
+    fun getFilterList(value: String): LiveData<List<FavDish>> =
+        repository.filterListDishes(value).asLiveData()
+
 }
 
 class FavDishViewModelFactory(private val repository: FavDishRepository) :

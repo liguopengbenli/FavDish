@@ -26,4 +26,8 @@ class FavDishRepository(private val favDishDao: FavDishDao) {
     }
 
 
+    fun filterListDishes(value: String): Flow<List<FavDish>> =
+        favDishDao.getFilterDishesList(value)
+
+
 }
