@@ -43,4 +43,15 @@
     <string name="title_add_dish">Add dish</string>
     <string name="title_edit_dish">Edit dish</string>
     <string name="lbl_update_dish">Update dish</string>
+
+    <string name="title_delete_dish">Delete Dish</string>
+    <string name="msg_delete_dish_dialog">Are you sure you want to delete %1$s.</string>
+    <string name="lbl_yes">Yes</string>
+    <string name="lbl_no">No</string>
+
+    <string name="action_filter_dishes">Filter Dishes</string>
+    <string name="title_select_item_to_filter">SELECT ITEM TO FILTER</string>
+
+
+
 </resources>

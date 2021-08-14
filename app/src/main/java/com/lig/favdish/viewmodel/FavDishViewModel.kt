@@ -20,6 +20,10 @@ class FavDishViewModel(
     fun update(dish: FavDish) = viewModelScope.launch {
         repository.updateFavDishData(dish)
     }
+
+    fun delete(favDish: FavDish) = viewModelScope.launch {
+        repository.deleteFavDishData(favDish)
+    }
 }
 
 class FavDishViewModelFactory(private val repository: FavDishRepository) :

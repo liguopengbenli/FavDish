@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -58,13 +57,15 @@ class FavDishAdapter(private val fragment: Fragment) :
 
             popup.setOnMenuItemClickListener {
                 if (it.itemId == R.id.action_edit_dish) {
-                    Toast.makeText(fragment.context, "edit dish", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(fragment.context, "edit dish", Toast.LENGTH_SHORT).show()
                     val intent =
                         Intent(fragment.requireActivity(), AddUpdateDishActivity::class.java)
                     intent.putExtra(Constants.EXTRA_DISH_DETAILS, dish)
                     fragment.requireActivity().startActivity(intent)
                 } else if (it.itemId == R.id.action_delete_dish) {
-                    Toast.makeText(fragment.context, "delete dish", Toast.LENGTH_SHORT).show()
+                    if (fragment is AllDishesFragment) {
+                        fragment.deleteDish(dish)
+                    }
 
                 }
                 true

@@ -9,6 +9,9 @@ object Constants {
     const val DISH_IMAGE_SOURCE_ONLINE: String = "Online"
     const val EXTRA_DISH_DETAILS: String = "DishDetails"
 
+    const val ALL_ITEMS = "All"
+    const val FILTER_SELECTION = "FilterSelection"
+
     /**
      * This function will return the Dish Type List items.
      */
