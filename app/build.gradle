@@ -11,6 +11,9 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
     defaultConfig {
         applicationId "com.lig.favdish"
         minSdkVersion 21
@@ -19,6 +22,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "cook_access_key", properties.getProperty('Cook_API_KEY'))
+
+
     }
 
     buildTypes {
