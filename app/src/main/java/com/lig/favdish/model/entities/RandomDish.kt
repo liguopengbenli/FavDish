@@ -1,6 +1,6 @@
 package com.lig.favdish.model.entities
 
-object RandomDishdata {
+object RandomDish {
     data class Recipes(
         val recipes: List<Recipe>
     )

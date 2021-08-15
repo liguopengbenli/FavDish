@@ -1,7 +1,7 @@
 package com.lig.favdish.model.network
 
 import com.lig.favdish.BuildConfig
-import com.lig.favdish.model.entities.RandomDishdata
+import com.lig.favdish.model.entities.RandomDish
 import com.lig.favdish.util.Constants
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
@@ -15,7 +15,7 @@ class RandomDishApiService {
         .build()
         .create(RandomDishAPI::class.java)
 
-    fun getRandomDish(): Single<RandomDishdata.Recipes> {
+    fun getRandomDish(): Single<RandomDish.Recipes> {
         return api.getRandomDish(
             BuildConfig.cook_access_key,
             Constants.LIMIT_LICENSE_VALUE,
