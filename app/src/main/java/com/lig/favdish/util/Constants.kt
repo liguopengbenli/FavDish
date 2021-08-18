@@ -22,6 +22,12 @@ object Constants {
     const val TAGS_VALUE: String = "vegetarian, dessert"
     const val NUMBER_VALUE = 1
 
+    const val NOTIFICATION_ID = "FavDish_notification_id"
+    const val NOTIFICATION_NAME = "FavDish"
+    const val NOTIFICATION_CHANNEL = "FavDish_channel_id"
+
+
+
 
     /**
      * This function will return the Dish Type List items.
